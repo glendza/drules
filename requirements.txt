@@ -1,0 +1,3 @@
+black
+durable_rules>=2.0.28,<3.0.0
+isort
