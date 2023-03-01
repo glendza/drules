@@ -1,0 +1,87 @@
+{
+  "ruleset": {
+    "test": {
+      "r_0": {
+        "all": [
+          {
+            "m": {
+              "$ex": {
+                "initial_value": 1
+              }
+            }
+          }
+        ],
+        "run": "actionset_1"
+      },
+      "mrs": {
+        "all": [
+          {
+            "m": {
+              "$ex": {
+                "someval": 1
+              }
+            }
+          }
+        ],
+        "run": "actionset_2"
+      },
+      "fwch": {
+        "all": [
+          {
+            "m": {
+              "$and": [
+                {
+                  "$ex": {
+                    "initial_value": 1
+                  }
+                },
+                {
+                  "$ex": {
+                    "someval": 1
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "run": "actionset_3"
+      }
+    }
+  },
+  "actionsets": {
+    "actionset_1": [
+      {
+        "order": 1,
+        "action": "assert_fact",
+        "payload": [
+          {
+            "someval": 5
+          }
+        ]
+      },
+      {
+        "order": 2,
+        "action": "assert_fact",
+        "payload": [
+          {
+            "someotherval": 10
+          }
+        ]
+      }
+    ],
+    "actionset_2": [
+      {
+        "order": 1,
+        "action": "print",
+        "payload": ["Hello world!"]
+      }
+    ],
+    "actionset_3": [
+      {
+        "order": 1,
+        "action": "print",
+        "payload": ["Forward chaining!"]
+      }
+    ]
+  }
+}
