@@ -23,12 +23,12 @@ def parse_action(action: dict) -> typing.Callable:
     match action.get("action"):
         case "assert_fact":
 
-            def fn(m):
+            def fn(c):
                 try:
                     print("Asserting fact!")
-                    lang.get_host().assert_fact(
-                        RULESET_NAME,
-                        *action.get("payload"),
+                    c.assert_fact(
+                        # RULESET_NAME,
+                        action.get("payload")[0],
                     )
                 except engine.MessageNotHandledException:
                     ...  # TODO: Add logger
@@ -37,9 +37,17 @@ def parse_action(action: dict) -> typing.Callable:
 
         case "print":
 
-            def fn(m):
+            def fn(c):
                 print("Printing payload!")
                 pprint.pprint(*action.get("payload"))
+
+            return fn
+
+        case "printAll":
+
+            def fn(c):
+                print("Printing all facts!")
+                pprint.pprint(lang.get_host().get_facts(RULESET_NAME))
 
             return fn
 
@@ -75,6 +83,7 @@ class MyHost(engine.Host):
 def run_rules():
     ruleset, actionsets = get_rules_and_actions()
     lang._main_host = MyHost(ruleset, actionsets)  # XXX Fuck that's ugly
+    pprint.pprint(lang.ruleset)
     lang.assert_fact(
         RULESET_NAME,
         {
