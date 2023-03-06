@@ -1,0 +1,77 @@
+{
+    "r_0": {
+        "all": [
+            {
+                "m": {
+                    "$and": [
+                        {
+                            "predicate": "eats"
+                        },
+                        {
+                            "object": "flies"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "r_1": {
+        "all": [
+            {
+                "m": {
+                    "$and": [
+                        {
+                            "predicate": "eats"
+                        },
+                        {
+                            "object": "worms"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "r_2": {
+        "all": [
+            {
+                "m": {
+                    "$and": [
+                        {
+                            "predicate": "is"
+                        },
+                        {
+                            "object": "frog"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "r_3": {
+        "all": [
+            {
+                "m": {
+                    "$and": [
+                        {
+                            "predicate": "is"
+                        },
+                        {
+                            "object": "bird"
+                        }
+                    ]
+                }
+            }
+        ]
+    },
+    "r_4": {
+        "all": [
+            {
+                "m": {
+                    "$ex": {
+                        "subject": 1
+                    }
+                }
+            }
+        ]
+    }
+}

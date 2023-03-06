@@ -1,0 +1,6 @@
+.vscode/*.log
+
+# Virtual environments stuff
+.python-version
+venv/
+.venv/
