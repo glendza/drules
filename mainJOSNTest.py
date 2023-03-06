@@ -4,15 +4,11 @@ import typing
 
 from durable import engine, lang
 
-RULESET_NAME = "animal"
-
-
-def printFacts(description, facts):
-    print("{0}: {1}".format(description, facts))
+RULESET_NAME = "test"
 
 
 def get_rules_and_actions() -> tuple[dict, dict]:
-    with open("ruleset2.json") as f:
+    with open("rulesetJSON.json") as f:
         content: dict = json.loads(f.read())
     return content.get("ruleset"), content.get("actionsets")
 
@@ -29,37 +25,29 @@ def parse_action(action: dict) -> typing.Callable:
 
             def fn(c):
                 try:
-                    print("Asserting fact!!!!!!!!!!!!!!!!!!!!!!!")
-                    printFacts("Facts that trigers the rule", c.m)
+                    print("Asserting fact!")
                     c.assert_fact(
                         RULESET_NAME,
                         action.get("payload")[0],
                     )
-                    printFacts("Facts", lang.get_host().get_facts(RULESET_NAME))
                 except engine.MessageNotHandledException:
-                    print("Exceprion add facts")
+                    ...  # TODO: Add logger
 
             return fn
 
         case "print":
 
             def fn(c):
-                try:
-                    print("Printing fact!!!!!!!!!!!!!!!!!!!!!!!")
-                    # print(*action.get("payload"))
-                    print(c.m)
-                except engine.MessageNotHandledException:
-                    ...  # TODO: Add logger
-                    print("Exceprion print")
+                print("Printing payload!")
+                pprint.pprint(*action.get("payload"))
 
             return fn
 
-        case "print_all":
+        case "printAll":
 
             def fn(c):
-                print("Printing ALL fact!!!!!!!!!!!!!!!!!!!!!!!")
-                # print(*action.get("payload"))
-                print(lang.get_host().get_facts(RULESET_NAME))
+                print("Printing all facts!")
+                pprint.pprint(lang.get_host().get_facts(RULESET_NAME))
 
             return fn
 
@@ -77,13 +65,13 @@ class MyHost(engine.Host):
         super().__init__(ruleset_definitions)
 
     def get_action(self, action_name: str):
-
-        sorted_actions = sorted(
-            self.actionsets.get(action_name),
-            key=lambda x: x.get("order"),
-        )
-
-        actionset = [parse_action(action) for action in sorted_actions]
+        actionset = [
+            parse_action(action)
+            for action in sorted(
+                self.actionsets.get(action_name),
+                key=lambda x: x.get("order"),
+            )
+        ]
 
         def new_method(m):
             for action in actionset:
@@ -95,12 +83,12 @@ class MyHost(engine.Host):
 def run_rules():
     ruleset, actionsets = get_rules_and_actions()
     lang._main_host = MyHost(ruleset, actionsets)  # XXX Fuck that's ugly
-    print(lang.get_host().get_ruleset(RULESET_NAME).get_definition())
+    pprint.pprint(lang.ruleset)
     lang.assert_fact(
-        RULESET_NAME, {"subject": "Kermit", "predicate": "eats", "object": "flies"}
-    )
-    lang.assert_fact(
-        RULESET_NAME, {"subject": "Twity", "predicate": "eats", "object": "worms"}
+        RULESET_NAME,
+        {
+            "initial_value": 8,
+        },
     )
 
 

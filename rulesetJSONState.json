@@ -1,0 +1,131 @@
+{
+    "ruleset": {
+        "flow": {
+            "r_0": {
+                "all": [
+                    {
+                        "m": {
+                            "$and": [
+                                {
+                                    "status": "start"
+                                },
+                                {
+                                    "$s": 1
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "run": "actionset_1"
+            },
+            "r_1": {
+                "all": [
+                    {
+                        "m": {
+                            "$and": [
+                                {
+                                    "status": "next"
+                                },
+                                {
+                                    "$s": 1
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "run": "actionset_2"
+            },
+            "r_2": {
+                "all": [
+                    {
+                        "m": {
+                            "$and": [
+                                {
+                                    "status": "last"
+                                },
+                                {
+                                    "$s": 1
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "run": "actionset_3"
+            }
+        }
+    },
+    "actionsets": {
+      "actionset_1": [
+        {
+          "order": 1,
+          "action": "change_state",
+          "payload": [
+            {
+                "state_name": "status",
+                "state_value": "next"
+            }
+          ]
+        },
+        {
+            "order": 2,
+            "action": "print_state",
+            "payload": [
+                {
+                    "state_name": "status"
+                }
+            ]
+        }
+      ],
+      "actionset_2": [
+        {
+            "order": 1,
+            "action": "change_state",
+            "payload": [
+              {
+                  "state_name": "status",
+                  "state_value": "last"
+              }
+            ]
+        },
+        {
+              "order": 2,
+              "action": "print_state",
+              "payload": [
+                  {
+                      "state_name": "status"
+                  }
+              ]
+          }
+      ],
+      "actionset_3": [
+        {
+            "order": 1,
+            "action": "change_state",
+            "payload": [
+              {
+                  "state_name": "status",
+                  "state_value": "end"
+              }
+            ]
+        },
+        {
+              "order": 2,
+              "action": "print_state",
+              "payload": [
+                  {
+                      "state_name": "status"
+                  }
+              ]
+        },
+        {
+              "order": 3,
+              "action": "delete_state",
+              "payload": [
+                  {
+                      "state_name": "status"
+                  }
+              ]
+        }
+      ]
+    }
+}

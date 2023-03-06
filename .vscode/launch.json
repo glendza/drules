@@ -5,28 +5,44 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Ruleset JSON",
+            "name": "Ruleset JSON test",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/main.py",
+            "program": "${workspaceFolder}/mainJOSN.py",
             "console": "integratedTerminal",
             "justMyCode": false
         },
         {
-            "name": "Ruleset from JSON",
+            "name": "Ruleset JSON FC",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/mainJSON.py",
+            "program": "${workspaceFolder}/mainJSONFC.py",
             "console": "integratedTerminal",
             "justMyCode": false
         },
         {
-            "name": "Ruleset Python",
+            "name": "Ruleset JSON State",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/mainOnlyPython.py",
+            "program": "${workspaceFolder}/mainJSONState.py",
             "console": "integratedTerminal",
             "justMyCode": false
-        }
+        },
+        {
+            "name": "Ruleset Python FC",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/mainPyFC.py",
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        {
+            "name": "Ruleset Python State",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/mainPyState.py",
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
     ]
 }

@@ -51,7 +51,7 @@ assert_fact("animal", {"subject": "Kermit", "predicate": "eats", "object": "flie
 assert_fact("animal", {"subject": "Twity", "predicate": "eats", "object": "worms"})
 
 if __name__ == "__main__":
-    with open("ruleset1.json", "w") as f:
+    with open("rulesetFC.json", "w") as f:
         json.dump(
             get_host().get_ruleset("animal").get_definition(),
             f,

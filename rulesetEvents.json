@@ -1,0 +1,31 @@
+{
+    "r_0": {
+        "all": [
+            {
+                "first": {
+                    "t": "purchase"
+                }
+            },
+            {
+                "second": {
+                    "$neq": {
+                        "location": {
+                            "first": "location"
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "r_1": {
+        "all": [
+            {
+                "m": {
+                    "$ex": {
+                        "second": 1
+                    }
+                }
+            }
+        ]
+    }
+}
